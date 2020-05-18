@@ -1,0 +1,186 @@
+/* Above bookmarks */
+#app {
+    /* font-size: 1rem; */
+}
+textarea {
+  height: 50vh;
+  width: 100%;
+  resize: none;
+}
+#results-wrapper {
+  padding: 5px;
+  /* width: 90%; */
+  margin-top: 2.5px;
+  margin-bottom: 2.5px;
+  display: inline-block;
+}
+input {
+  width: 50%;
+}
+@media (max-width: 991px) {
+    input {
+      width: 100%
+    }
+}
+#formulas-wrapper input {
+  width: 30%;
+}
+/* #btn-add-formula {
+  cursor: pointer;
+} */
+
+.formula {
+  margin-bottom: 5px;
+}
+#options-bottom-right {
+  position:relative; bottom:10px; right:10px;
+  background-color: rgba(255, 255, 255, .5);
+  padding: 5px;
+  border-radius:5px;
+  float:right;
+}
+#options-bottom-right {
+  text-decoration: none;
+}
+/* #backup-link {
+  color: black;
+}
+#backup-link:hover {
+  color: blue;
+} */
+@media (max-width: 991px) {
+  #mobile-flushed-bottom {
+    height: 75px;
+  }
+}
+.spacer {
+    width: 1px;
+    height: 10px;
+}
+
+/* Bookmarks */
+.bookmark .form-group {
+  display: table !important;
+  width: 100%;
+  padding: 10px;
+}
+.bookmark .form-row  { 
+  display: table-row;
+  width: 100%;
+}
+.bookmark label {
+  display: table-cell;
+  text-align: left;
+  width: 40%;
+}
+.bookmark .table-cell,
+.bookmark input[type="text"] {
+  display: table-cell;
+  text-align: left;
+  width: 100%;
+}
+
+/* Limit option char limit */
+select option {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* max-width: 100px; */
+}
+select {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.clickable {
+  cursor: pointer;
+}
+.clickable:hover {
+  color: green;
+}
+.active-icon {
+  color: darkgreen !important;
+  opacity: .4;
+}
+.clickable:active {
+  color: darkgreen;
+  opacity: 1;
+}
+
+#title {
+  cursor: help;
+}
+
+#textarea-block textarea {
+  height: 75vh;
+  width: 100%;
+  resize: none;
+  margin-top: 20px;
+}
+
+.bookmarks-wrapper .bookmarks {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bookmarks-wrapper .bookmarks .bookmark {
+  flex: 33%;
+  text-align: center;
+}
+
+.bookmarks-wrapper .bookmarks .bookmark .inner {
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.bookmarks-wrapper .bookmarks .bookmark .spacer {
+  height: 1ch;
+}
+
+@media (max-width: 768px) {
+  
+  .bookmark {
+    flex: 100% !important;
+  }
+}
+
+.bookmark-btn {
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: .2;
+}
+
+.bookmark-btn:hover {
+  color: green;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.ui-state-highlight {
+  background-color: yellow;
+}
+
+.bookmark .dropdown {
+  max-width: 60%;
+  float: right;
+}
+
+.bookmark .dropdown-wrapper {
+  padding-left:10px;
+  padding-right:10px;
+}
+textarea:not(#textarea) {
+  height:25px;
+}
