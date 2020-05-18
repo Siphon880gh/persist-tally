@@ -403,7 +403,12 @@ App = class {
     // Nocache
     $.ajaxSetup({ cache: false });
 
-    load();
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    if(urlParams.has('open')) {
+      let filename = urlParams.get('open');
+      if(filename.length) loadByUrl(filename);
+    }
     
     // Attach saving when stop typing
     TriggerWhenStopTyping($("#textarea"), ()=>{
@@ -454,9 +459,9 @@ App = class {
       if(matched!==null) {
         matched = matched[1];  // index 1 is where the match group is
         matched = parseFloat(matched);
-        if(!isNaN(matched)) num = matched;
       }
-      if(num>0) {
+      if(matched!==null && !isNaN(matched)) {
+        num = matched;
         if($("#beforeATally").val().length>0) {
           var evalCode = $("#beforeATally").val();
           try {
@@ -488,6 +493,9 @@ SaveLoadSystem = class {
     globalize() {
       window.load = this.load;
       window.save = this.save;
+      window.saveByUser = this.saveByUser;
+      window.loadByUser = this.loadByUser;
+      window.loadByUrl = this.loadByUrl;
     }
 
     constructor() {
@@ -495,7 +503,49 @@ SaveLoadSystem = class {
 
     } // constructor
 
+    loadByUrl(urlFilename) {
+      $.get("data-read/file-exists.php", {filename: urlFilename}, (res)=>{
+        if(res.indexOf("error")===0) {
+          console.error("Error: File in url param 'open' does not exist. Please check spelling or notify person giving you the url.");
+          window.history.pushState(null, "", "?"); // erase url param
+        } else {
+          $("#opened-filename").text(urlFilename);
+          load();
+        }
+      }); // check file exists
+    } // loadByUrl
+
+    saveByUser() {
+      let prompt1 = prompt("Give a name to this document:");
+      if(prompt1!==null && prompt1.length>0) {
+        $("#opened-filename").text(prompt1);
+        window.history.pushState(null, prompt1, `?open=${prompt1}`);
+      }
+      save();
+    }
+
+    loadByUser() {
+      let alertError = () => alert("Error: File does not exist.");
+      let prompt1 = prompt("Open filename:");
+      if(prompt1!==null && prompt1.length>0) {
+        $.get("data-read/file-exists.php", {filename: prompt1}, (res)=>{
+          if(res.indexOf("error")===0)
+            alertError();
+          else {
+            $("#opened-filename").text(prompt1);
+            window.history.pushState(null, prompt1, `?open=${prompt1}`);
+            load();
+          }
+        }); // check file exists
+      } // Opening not cancelled
+
+    } // loadByUser
+
     save() {
+      let hasFilename = $("#opened-filename").text().length>0;
+      if( !hasFilename ) { console.error("Error: No filename to save to. Click Save icon to add a filename."); return; }
+      let filename = $("#opened-filename").text();
+
       window.formulas = [];
       window.tally = 0;
       window.counter = 0;
@@ -522,6 +572,7 @@ SaveLoadSystem = class {
       });
 
       var data = {
+        filename,
         textarea:$("#textarea").val(),
         input:$("#input").val(),
         input2:$("#input2").val(),
@@ -539,7 +590,11 @@ SaveLoadSystem = class {
     }; // save
 
   load() {
-    $.getJSON("data/data.json")
+    let hasFilename = $("#opened-filename").text().length>0;
+    if( !hasFilename ) { return; }
+    let filename = $("#opened-filename").text();
+
+    $.getJSON(`data/${filename}.json`)
     .done(obj=>{
       var {
             textarea="", input="", input2="", 

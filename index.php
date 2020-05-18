@@ -27,19 +27,37 @@
 </head>
     <body>
         <div class="container" style="position:relative;">
-        <h3>Persistent Tally</h3>
-        <h6 style="font-weight:400;" ><?php 
-            require("dates/data-printer.php");
-        ?></h6>
+        <h3 onclick="window.location.href='index.php'" style="cursor:pointer; display:inline-block;">Persistent Tally</h3>
 
           <div id="app">
-            <div><b>Sum up negative and positive numbers on each line (you may add notes after it on the same line). And this saves persistently so helps you over long run to tally up.</b></div>
+            <div id="app-desc">This is a flexible text editor that has built-in saving, tallying, formulas, and bookmarks. 
+              <a href="?open=sample1">Sample 1</a>. 
+              <a href="?open=sample2">Sample 2</a>.
+          </div>
+            <!-- <br/> -->
+
+            <div style="margin-top:1.25rem; margin-bottom:0.5rem;"><?php 
+              require("dates/date-printer.php");
+            ?></div><br/>
 
             <div id="textarea-wrapper" style="position:relative;">
-              <div id="page-corner-anim" style="display: none; position: absolute; top:3px; right:3px; font-weight:400; background-color:yellow; border: 1.5px solid orange; border-radius:2.5px; padding-left: 5px; padding-right:5px; padding-top:2.5px; padding-bottom:2.5px;
+
+              <div style="position:absolute; top:-2.25rem; left:3px">
+                  <i class="fa fa-print clickable" onclick="openPrintDialogue();"></i>
+                  <span>&nbsp;&nbsp;&nbsp;</span>
+                  <i class="fa fa-copy clickable" onclick="selectAndCopyTextarea($(&quot;#textarea&quot;), $(&quot;#status-textarea-copied&quot;))"></i>
+                  <span>&nbsp;<span class="vertical-bar">&nbsp;&nbsp;|&nbsp;</span>&nbsp;</span>
+                  <i class="fa fa-save clickable" onclick="saveByUser();"></i>
+                  <span>&nbsp;&nbsp;</span>
+                  <span style="padding:5px; border-radius:2.5px; background-color:darkorange;">
+                    <i class="fa fa-folder-open clickable" onclick="loadByUser();"></i>
+                    <span id="opened-filename" style="margin-right:5px;"></span>
+                  </span>
+              </div>
+
+              <div id="page-corner-anim" style="display: none; position: absolute; top:-2px; right:3px; font-weight:400; background-color:yellow; border: 1.5px solid orange; border-radius:2.5px; padding-left: 5px; padding-right:5px; padding-top:2.5px; padding-bottom:2.5px;
                 ">Saved!</div>
-              <textarea id="textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="## some desc
-## some desc"></textarea>
+              <textarea id="textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="margin-top:1.25rem;"></textarea>
             </div>
             <span class="text-info bg-info" id="results-wrapper">
               <b>Tallied:&nbsp;</b>

@@ -184,3 +184,7 @@ select {
 textarea:not(#textarea) {
   height:25px;
 }
+
+#app-desc {
+  font-weight: 500;
+}
