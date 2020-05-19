@@ -49,8 +49,13 @@
                   <span>&nbsp;<span class="vertical-bar">&nbsp;&nbsp;|&nbsp;</span>&nbsp;</span>
                   <i class="fa fa-save clickable" onclick="saveByUser();"></i>
                   <span>&nbsp;&nbsp;</span>
-                  <span style="padding:5px; border-radius:2.5px; background-color:darkorange;">
-                    <i class="fa fa-folder-open clickable" onclick="loadByUser();"></i>
+                  <span style="padding:5px; border-radius:2.5px; background-color:darkorange; position:relative">
+                    <span id="dropdown-openable-wrapper" class="hide" style="position:absolute; bottom:3px; left:24px">
+                      <select style="width: 200px;">
+                        <option>- Select file -</option>
+                      </select>
+                    </span>
+                    <i class="fa fa-folder-open clickable" onclick="loadByUser();" onmouseover="loadByUser();"></i>
                     <span id="opened-filename" style="margin-right:5px;"></span>
                   </span>
               </div>

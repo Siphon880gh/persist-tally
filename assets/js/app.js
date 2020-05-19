@@ -44,6 +44,30 @@ ResizeTextareaSystem = class {
   }
 
   hooks() {
+
+    $("#dropdown-openable-wrapper select").on("change", (ev)=>{
+      let value = ev.target.value;
+      if(value.length) {
+        let filename = value;
+        $("#opened-filename").text(filename);
+        window.history.pushState(null, filename, `?open=${filename}`);
+        load();
+        $("#dropdown-openable-wrapper").addClass("hide");
+      }
+    });
+
+    // if(prompt1!==null && prompt1.length>0) {
+    //   $.get("data-read/file-exists.php", {filename: prompt1}, (res)=>{
+    //     if(res.indexOf("error")===0)
+    //       alertError();
+    //     else {
+    //       $("#opened-filename").text(prompt1);
+    //       window.history.pushState(null, prompt1, `?open=${prompt1}`);
+    //       load();
+    //     }
+    //   }); // check file exists
+    // } // Opening not cancelled
+
     $(window).on("resize", ()=> {
       this.readjustTextareaHeight( $("#textarea") );
       this.readjustInputHeight( $("#input") );
@@ -525,19 +549,23 @@ SaveLoadSystem = class {
     }
 
     loadByUser() {
-      let alertError = () => alert("Error: File does not exist.");
-      let prompt1 = prompt("Open filename:");
-      if(prompt1!==null && prompt1.length>0) {
-        $.get("data-read/file-exists.php", {filename: prompt1}, (res)=>{
-          if(res.indexOf("error")===0)
-            alertError();
-          else {
-            $("#opened-filename").text(prompt1);
-            window.history.pushState(null, prompt1, `?open=${prompt1}`);
-            load();
-          }
-        }); // check file exists
-      } // Opening not cancelled
+      $("#dropdown-openable-wrapper select").html("");
+      $("#dropdown-openable-wrapper select").append(`<option value="">- Select file -</option>`);
+      $.get("data-read/list-files.php", (list)=>{
+        list = JSON.parse(list);
+        var filenames = []; 
+
+        list.forEach((filename)=>{ 
+          if(filename!=="." && filename!==".." && filename!==".DS_Store") 
+          filenames.push( filename.replace(".json", "") ); 
+        });
+        filenames.forEach(filename=>{
+          var $option = `<option value="${filename}">${filename}</option>`;
+          $("#dropdown-openable-wrapper select").append($option);
+        });
+      });
+
+      $("#dropdown-openable-wrapper").toggleClass("hide");
 
     } // loadByUser
 
