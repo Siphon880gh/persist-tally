@@ -631,12 +631,18 @@ SaveLoadSystem = class {
             bookmarkTitles=[],
             bookmarkTokens=[],
           } = (obj.toString().length>2) ? obj:{};
+
+      $("#textarea").val(textarea);
+      $("#input").val(input);
+      $("#input2").val(input2);
+      $("#beforeATally").val(beforeATally);
+      $("#afterAllTally").val(afterAllTally);
       
-      $("#textarea").val(decodeURIComponent(textarea));
-      $("#input").val(decodeURIComponent(input));
-      $("#input2").val(decodeURIComponent(input2));
-      $("#beforeATally").val(decodeURIComponent(beforeATally));
-      $("#afterAllTally").val(decodeURIComponent(afterAllTally));
+      // $("#textarea").val(decodeURIComponent(textarea));
+      // $("#input").val(decodeURIComponent(input));
+      // $("#input2").val(decodeURIComponent(input2));
+      // $("#beforeATally").val(decodeURIComponent(beforeATally));
+      // $("#afterAllTally").val(decodeURIComponent(afterAllTally));
 
       $(".bookmarks").html("");
       // var bookmarks = [];
@@ -646,8 +652,10 @@ SaveLoadSystem = class {
           var $newDom = $(`
             <div class='formula'><span class='fa fa-close close'>&nbsp;</span><span class='desc' contenteditable></span><br/><span>{ <input class='equation' type='text'></input> } => </span><span class='result'></span></div>
           `);
-          $newDom.find(".desc").html(decodeURIComponent(desc));
-          $newDom.find(".equation").val(decodeURIComponent(equation));
+          $newDom.find(".desc").html(desc);
+          $newDom.find(".equation").val(equation);
+          // $newDom.find(".desc").html(decodeURIComponent(desc));
+          // $newDom.find(".equation").val(decodeURIComponent(equation));
           $("#formulas-wrapper").append($newDom);
         }); // foreach formulaPanel
       } // formulas, if
