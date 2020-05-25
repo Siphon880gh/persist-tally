@@ -80,7 +80,7 @@ ResizeTextareaSystem = class {
   readjustTextareaHeight($textarea) {
     var textareaTop = $textarea.offset().top;
     var windowHeight = $(window).innerHeight();
-    var minHeightTextarea = 245;
+    var minHeightTextarea = $(window).height() * .75; // Equivalent 75vh
 
     textareaTop = parseInt(textareaTop);
     windowHeight = parseInt(windowHeight);
@@ -667,7 +667,8 @@ SaveLoadSystem = class {
         addBookmark({ title, token });
       });
       reparseBookmarks();
-
+      tallier();
+      evalier();
       
     }); // done
   }; // load
