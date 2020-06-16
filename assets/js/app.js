@@ -645,6 +645,7 @@ SaveLoadSystem = class {
       // $("#afterAllTally").val(decodeURIComponent(afterAllTally));
 
       $(".bookmarks").html("");
+      $("#formulas-wrapper").html("");
       // var bookmarks = [];
       if(formulas.length) {
         formulas.forEach(formulaPanel=>{
