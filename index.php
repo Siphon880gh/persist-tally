@@ -12,7 +12,7 @@
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     
     <!-- LiveQuery -->
-    <script src="//raw.githack.com/tkambler/whenLive/master/src/jquery.whenlive.js"></script>
+    <script src="vendor/jquery.whenlive.js"></script>
     <script src="assets/js/libs/trigger-when-stop-typing.js"></script>
     <script src="assets/js/libs/multisearch-textarea.js"></script>
 
