@@ -479,12 +479,16 @@ App = class {
     let lines = $ta.val().split('\n');
     lines.forEach(line=>{
       if(line.length===0) return;
-    var matched = line.match("^([0-9\+\.\*/\-]+)");
+      var matched = line.match("^([0-9\+\.\*/\-]+)");
       // var matched = line.match("^(\-?[0-9\.]+)");
       // var matched = line.match("^((\+|\-)?[0-9\.]+)");
       if(matched!==null) {
         matched = matched[1];  // index 1 is where the match group is
-        matched = eval(matched); // like 1/2 becomes .5
+        try {
+          matched = eval(matched); // like 1/2 becomes .5
+        } catch(e) {
+          return false;
+        }
         matched = parseFloat(matched);
       }
       if(matched!==null && !isNaN(matched)) {
