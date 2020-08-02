@@ -42,7 +42,7 @@
 
             <div id="textarea-wrapper" style="position:relative;">
 
-              <div style="position:absolute; top:-2.25rem; left:3px">
+              <div class="buttons" style="position:absolute; top:-2.25rem; left:3px">
                   <i class="fa fa-print clickable" onclick="openPrintDialogue();"></i>
                   <span>&nbsp;&nbsp;&nbsp;</span>
                   <i class="fa fa-copy clickable" onclick="selectAndCopyTextarea($(&quot;#textarea&quot;), $(&quot;#status-textarea-copied&quot;))"></i>
