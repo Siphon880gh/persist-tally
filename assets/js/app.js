@@ -479,7 +479,9 @@ App = class {
     let lines = $ta.val().split('\n');
     lines.forEach(line=>{
       if(line.length===0) return;
-      var matched = line.match("^([0-9\+\.\*/\-]+)");
+      // var matched = line.match("^([0-9\+\.\*/\-]+)");
+      // var matched = line.match("^([0-9\+\.\*\-\(\)/]+)");
+      var matched = line.match(/^([0-9+.*\-()/]+)/);
       if(matched!==null) {
         // console.log("Matched:" + matched[1]);
         // matched = matched[1];  // index 1 is where the match group is
