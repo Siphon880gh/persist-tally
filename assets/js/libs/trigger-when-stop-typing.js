@@ -25,7 +25,7 @@ function TriggerWhenStopTyping($textarea, callback) {
     this.$textarea = $textarea; 
     this.callback = callback;
     if($textarea.length==0) {
-        console.log("ERROR: jQuery queried DOM does not exist.");
+        // console.log("ERROR: jQuery queried DOM does not exist.");
         return;
     }
     var tthis = this;
@@ -36,7 +36,7 @@ function TriggerWhenStopTyping($textarea, callback) {
         clearTimeout(tthis.recounter);
         }
         tthis.recounter = setTimeout(()=>{ 
-        console.log(`Hadn't reset timer because no typing detected for ${tthis.poll}ms. This timer eventually triggers functions such as save.`);
+        // console.log(`Hadn't reset timer because no typing detected for ${tthis.poll}ms. This timer eventually triggers functions such as save.`);
         tthis.callback(); 
         }, tthis.poll);
     } // resetRecounter
@@ -45,11 +45,11 @@ function TriggerWhenStopTyping($textarea, callback) {
     this.$textarea
         .on("input", () => {
             tthis.resetRecounter();
-            console.log("Resetted timer because user typed. This timer eventually triggers functions such as save.");
+            // console.log("Resetted timer because user typed. This timer eventually triggers functions such as save.");
         }) // keydown
         .on("blur", () => {
             clearTimeout(tthis.recounter);
-            console.log("Triggered because user stopped typing");
+            // console.log("Triggered because user stopped typing");
             tthis.callback();
         });
     

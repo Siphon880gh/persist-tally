@@ -236,7 +236,7 @@ BookmarkSystem = class {
   reparseBookmarks() {
       // event.stopPropagation();
       // event.preventDefault();
-      console.log("Reparsing dropdowns");
+      // console.log("Reparsing dropdowns");
 
       var lines = $("#textarea").val()
                               .split("\n");
@@ -256,7 +256,7 @@ BookmarkSystem = class {
                   var parsed = line.substr(token.length+1);
                   if(parsed.length>60)
                       parsed = parsed.substr(0, 57) + "..."; 
-                  console.log(parsed);
+                  // console.log(parsed);
 
                   var $opt = $("<option/>").attr("value", parsed)
                                           .data("jump", i)
@@ -338,7 +338,7 @@ TextareaHelpers = class {
     }
 
     keyup() {
-      console.log("Keyup -> tally, eval, save");
+      // console.log("Keyup -> tally, eval, save");
       tallier();
       evalier();
       reparseBookmarks();
@@ -393,10 +393,10 @@ TextareaHelpers = class {
         try {
             var successful = document.execCommand( 'copy' );
             var msg = successful ? 'successful' : 'unsuccessful';
-            console.log('Copying text command was ' + msg);
+            // console.log('Copying text command was ' + msg);
             $done.fadeIn(800).delay(1200).fadeOut(500);
         } catch (err) {
-            console.log('Oops, unable to copy');
+            // console.log('Oops, unable to copy');
         }
 
         } // saveToClipboard
@@ -480,14 +480,14 @@ App = class {
     lines.forEach(line=>{
       if(line.length===0) return;
       var matched = line.match("^([0-9\+\.\*/\-]+)");
-      // var matched = line.match("^(\-?[0-9\.]+)");
-      // var matched = line.match("^((\+|\-)?[0-9\.]+)");
       if(matched!==null) {
-        matched = matched[1];  // index 1 is where the match group is
+        // console.log("Matched:" + matched[1]);
+        // matched = matched[1];  // index 1 is where the match group is
         try {
-          matched = eval(matched); // like 1/2 becomes .5
+          matched = eval(matched[1]); // like 1/2 becomes .5
         } catch(e) {
-          return false;
+          // console.log("FALSE");
+          // return false;
         }
         matched = parseFloat(matched);
       }
@@ -497,6 +497,8 @@ App = class {
           var evalCode = $("#beforeATally").val();
           try {
             eval(evalCode); // prevents js from stopping all other lines if fails
+            // debugger;
+            // console.log(line);
           } catch(err) { }
         } // before a number
 
@@ -508,7 +510,7 @@ App = class {
           // console.log(tally);
         } // after a number
 
-        window.tally += num; // parseFloat is necessary again or it becomes a string due to toFixed
+        window.tally += parseFloat(num); // parseFloat is necessary again or it becomes a string due to toFixed
         window.counter++;
       } // if there's a number starting a line
     }); // foreach
@@ -618,7 +620,7 @@ SaveLoadSystem = class {
         bookmarkTokens: bookmarkTokens
       }
       $.post("data-write/write.php", {payload:data}).done(res=>{
-        console.log("Triggered to save" + res);
+        // console.log("Triggered to save" + res);
         $("#page-corner-anim").fadeIn(200); setTimeout(()=>{ $("#page-corner-anim").fadeOut(300); }, 500);
       }); // post
 

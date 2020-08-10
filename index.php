@@ -92,7 +92,7 @@
             <div style="width:1px; height:5px;"></div>
             </div>
             <div class="input-form">
-              <label for="input" style="color:#9ba8b8;">Event: Run code before tallying at each line (lets you set read/write variable <i>num</i> and read <i>line</i>):</label>
+              <label for="input" style="color:#9ba8b8;">Event: Run code before tallying at each line (lets you set read/write variable <i>num</i> and read <i>line</i>. Num is the number that gets parsed from the line's first characters and added to the tally):</label>
               <textarea id="beforeATally" type="text" style="color:#9ba8b8;"></textarea>
             </div>
             <div class="input-form">
