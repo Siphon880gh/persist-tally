@@ -75,7 +75,11 @@ ResizeTextareaSystem = class {
       this.readjustInputHeight( $("#beforeATally") );
       this.readjustInputHeight( $("#afterAllTally") );
     });
-  }
+
+    $("#input, #input2, #beforeATally, #afterAllTally").on("keyup", ()=>{
+      this.readjustInputHeight( $(event.target) );
+    });
+  } // hooks
 
   readjustTextareaHeight($textarea) {
     var textareaTop = $textarea.offset().top;
