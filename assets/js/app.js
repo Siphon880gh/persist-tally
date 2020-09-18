@@ -479,22 +479,36 @@ App = class {
     let lines = $ta.val().split('\n');
     lines.forEach(line=>{
       if(line.length===0) return;
-      // var matched = line.match("^([0-9\+\.\*/\-]+)");
-      // var matched = line.match("^([0-9\+\.\*\-\(\)/]+)");
-      var matched = line.match(/^([0-9+.*\-()/]+)/);
+      var matched = line.match(/^([0-9+.*\-()\[v/]+)/i);
+      var matched_ = 0;
+
       if(matched!==null) {
-        // console.log("Matched:" + matched[1]);
-        // matched = matched[1];  // index 1 is where the match group is
+        var matched_ = matched[1];
+        // console.log("matched_:" + matched_[1]);
+        // matched_ = matched_[1];  // index 1 is where the match group is
         try {
-          matched = eval(matched[1]); // like 1/2 becomes .5
+          var hasNumeral = (matched_.match(/[0-9]/g) || []).length>0;
+      
+          if(hasNumeral) {
+            matched_ = eval(matched_); // like 1/2 becomes .5
+            matched_ = parseFloat(matched_) || 0;
+            console.log("hasNumeral");
+          } else {
+            // v (v [v ( [
+            console.log("v (v [v ( [");
+            matched_ = matched_.replace(/\[v/gi, "").replace(/\(v/gi, "");
+            matched_ = matched_.replace(/v/gi, "");
+            var semi = (matched_.match(/\(/g) || []).length;
+            var def = (matched_.match(/\[/g) || []).length*2;
+            matched_ = semi+def;
+          }
         } catch(e) {
           // console.log("FALSE");
           // return false;
         }
-        matched = parseFloat(matched);
       }
-      if(matched!==null && !isNaN(matched)) {
-        num = matched;
+      if(matched!==null && !isNaN(matched_)) {
+        num = matched_;
         if($("#beforeATally").val().length>0) {
           var evalCode = $("#beforeATally").val();
           try {
@@ -503,7 +517,7 @@ App = class {
             // console.log(line);
           } catch(err) { }
         } // before a number
-
+    
         if($("#afterAllTally").val().length>0) {
           var evalCode = $("#afterAllTally").val();
           try {
@@ -511,12 +525,12 @@ App = class {
           } catch(err) { }
           // console.log(tally);
         } // after a number
-
+    
         window.tally += parseFloat(num); // parseFloat is necessary again or it becomes a string due to toFixed
         window.counter++;
       } // if there's a number starting a line
     }); // foreach
-
+    
     $tally.text(window.tally.toFixed(2));
     $counter.text(window.counter);
   } // tallier

@@ -81,22 +81,22 @@
             <hr/>
 
             <div class="input-form">
-              <label for="input">Notes: Describe recent situations (such as recently subtracted):</label>
+              <label for="input">Notes: Describe recent situations</label>
               <textarea id="input" type="text"></textarea>
             <div style="width:1px; height:5px;"></div>
             </div>
             <div class="input-form">
-              <label for="input" style="color:#9ba8b8;">Notes: Describe big picture situations:</label>
+              <label for="input" style="color:#9ba8b8;">Notes: How to use, Big picture of this tally, etc</label>
               <textarea id="input2" type="text" style="color:#9ba8b8;"></textarea>
             </div>
             <div style="width:1px; height:5px;"></div>
             </div>
             <div class="input-form">
-              <label for="input" style="color:#9ba8b8;">Event: Run code before tallying at each line (lets you set read/write variable <i>num</i> and read <i>line</i>. Num is the number that gets parsed from the line's first characters and added to the tally):</label>
+              <label for="input" style="color:#9ba8b8;">Before Tally Line: Run code before tallying at each line (lets you set read/write variable <i>num</i>, and read <i>matched</i> and <i>line</i>. Variable num is the number that gets calculated from the line's first characters and added to the tally. Variable matched is the text that gets parsed before evaluating into num. You can alert or console the variable.):</label>
               <textarea id="beforeATally" type="text" style="color:#9ba8b8;"></textarea>
             </div>
             <div class="input-form">
-              <label for="input" style="color:#9ba8b8;">Event: Run code after tallying all lines (lets you set read/write variable <i>tally</i>):</label>
+              <label for="input" style="color:#9ba8b8;">After Tally Line: Run code after tallying all lines (lets you set read/write variable <i>tally</i>):</label>
               <textarea id="afterAllTally" type="text" style="color:#9ba8b8;"></textarea>
             </div>
             <br/>
