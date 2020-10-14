@@ -36,9 +36,9 @@
           </div>
             <!-- <br/> -->
 
-            <div style="margin-top:1.25rem; margin-bottom:0.5rem;"><?php 
+            <div id="dates" style="margin-top:1.25rem; margin-bottom:0.5rem;"><?php 
               require("dates/date-printer.php");
-            ?></div><br/>
+            ?></div><br id="dates-spacer-bottom" />
 
             <div id="textarea-wrapper" style="position:relative;">
 
