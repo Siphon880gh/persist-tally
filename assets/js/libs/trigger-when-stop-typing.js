@@ -17,30 +17,30 @@
  *     let detector = TriggerWhenStopTyping($("#log), save);
  * 
  */
-function TriggerWhenStopTyping($textarea, callback) { 
+function TriggerWhenStopTyping($textarea, callback) {
     /* Customizable */
     this.poll = 1200; // ms
-    
+
     /* Engine */
-    this.$textarea = $textarea; 
+    this.$textarea = $textarea;
     this.callback = callback;
-    if($textarea.length==0) {
+    if ($textarea.length == 0) {
         // console.log("ERROR: jQuery queried DOM does not exist.");
         return;
     }
     var tthis = this;
-    
+
     this.recounter = null;
     this.resetRecounter = () => {
-        if(tthis.recounter!==null) {
-        clearTimeout(tthis.recounter);
-        }
-        tthis.recounter = setTimeout(()=>{ 
-        // console.log(`Hadn't reset timer because no typing detected for ${tthis.poll}ms. This timer eventually triggers functions such as save.`);
-        tthis.callback(); 
-        }, tthis.poll);
-    } // resetRecounter
-    
+            if (tthis.recounter !== null) {
+                clearTimeout(tthis.recounter);
+            }
+            tthis.recounter = setTimeout(() => {
+                // console.log(`Hadn't reset timer because no typing detected for ${tthis.poll}ms. This timer eventually triggers functions such as save.`);
+                tthis.callback();
+            }, tthis.poll);
+        } // resetRecounter
+
     // On input
     this.$textarea
         .on("input", () => {
@@ -52,5 +52,5 @@ function TriggerWhenStopTyping($textarea, callback) {
             // console.log("Triggered because user stopped typing");
             tthis.callback();
         });
-    
-    } // TriggerWhenStopTyping
+
+} // TriggerWhenStopTyping

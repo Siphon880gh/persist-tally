@@ -40,9 +40,11 @@
               require("dates/date-printer.php");
             ?></div><br id="dates-spacer-bottom" />
 
+            <div id="warning-localhost" class="hide" style="color:orange; padding:10px; border: 1px solid orange; margin-bottom:30px;">WARNING: This is on localhost. We recommend using the online version so you have access to the most updated content on all devices.</div>
+
             <div id="textarea-wrapper" style="position:relative;">
 
-              <div class="buttons" style="position:absolute; top:-2.25rem; left:3px">
+              <div class="buttons" style="position:absolute; top:-1.25rem; left:3px">
                   <i class="fa fa-print clickable" onclick="openPrintDialogue();"></i>
                   <span>&nbsp;&nbsp;&nbsp;</span>
                   <i class="fa fa-copy clickable" onclick="selectAndCopyTextarea($(&quot;#textarea&quot;), $(&quot;#status-textarea-copied&quot;))"></i>

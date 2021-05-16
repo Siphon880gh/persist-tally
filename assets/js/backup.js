@@ -1,13 +1,16 @@
 function downloadChain() {
+    var params = new URLSearchParams(window.location.search);
+    var filename = params.get("open");
+
     $.ajax({
-        url: "data/data.json",
+        url: `data/${filename}.json`,
         dataType: "text"
     }).done(content => {
         // Get filename based on folder name
-        url = window.location.href; 
-        if(url[url.length-1]==='/') url = url.substr(0, url.length-1); 
-        lastSlash = url.lastIndexOf("/"); 
-        filename = url.substr(lastSlash+1)
+        // url = window.location.href; 
+        // if(url[url.length-1]==='/') url = url.substr(0, url.length-1); 
+        // lastSlash = url.lastIndexOf("/"); 
+        // filename = url.substr(lastSlash+1)
         downloadByContent(content, filename); // will popup the download
     }) // ajax
 } // downloadChain
