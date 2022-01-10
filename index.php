@@ -47,7 +47,7 @@
               <div class="buttons" style="position:absolute; top:-1.25rem; left:3px">
                   <i class="fa fa-print clickable" onclick="openPrintDialogue();"></i>
                   <span>&nbsp;&nbsp;&nbsp;</span>
-                  <i class="fa fa-copy clickable" onclick="selectAndCopyTextarea($(&quot;#textarea&quot;), $(&quot;#status-textarea-copied&quot;))"></i>
+                  <i class="fa fa-copy clickable" onclick="selectAndCopyTextarea($('#textarea'), $('#status-textarea-copied'))"></i>
                   <span>&nbsp;<span class="vertical-bar">&nbsp;&nbsp;|&nbsp;</span>&nbsp;</span>
                   <i class="fa fa-save clickable" onclick="saveByUser();"></i>
                   <span>&nbsp;&nbsp;</span>
@@ -75,11 +75,45 @@
               <span id="counter">0</span>
             </span>
 
-            <br/><br/>
+            <br/>
             <div>
               <span style="font-weight:800;">Status: </span>
               <span id="status"><span style="color:gray">You can display statuses or results here with the code $("#status").text(....) from any run code input fields.</span></span>
             </div>
+            
+            <hr/>
+
+            <div id="formulas-wrapper"></div>
+
+            <div id="options-bottom-right-off" style="margin-top:18px;">
+              <span class="clickable" id="btn-add-formula" style="margin-right:20px;"><span class="fa fa-plus"></span><span>&nbsp; Add formula</span></span>
+              <span class="clickable" id="btn-tips-formula" style="margin-right:20px;"><span class="fa fa-question"></span><span>&nbsp; Some tips</span></span>
+              <span class="clickable" id="info-backup-as" onclick="downloadChain();"><span class="fa fa-save"></span><span>&nbsp; Backup</span></span>
+
+              <template id="formula-template">
+                <div class="formula"><span class='fa fa-close close clickable'>&nbsp;</span><span class="desc" contenteditable="">Untitled formula</span><br/><span>{ <input class="equation" type="text" value=""> } =&gt; </span><span class="result"></span></div>
+              </template>
+            </div>
+
+            <hr/>         
+
+            <div class="bookmarks-wrapper">
+                <div id="options-bookmark-jump">
+                    <span>
+                        <span style="font-size:1.3rem;">Bookmarks</span>
+                        <a href="#" id="add-parser"><span class="fa fa-plus"></span></a>
+                    </span>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <span>
+                        <a href="javascript:void(0);" onclick="$('html,body').animate({scrollTop: 0});"><span class="fa fa-caret-square-o-up"></span></a>
+                        <span>&nbsp;</span>
+                        <a href="javascript:void(0);" onclick="$('html,body').animate({ scrollTop: $('#options-bookmark-jump').offset().top });"><span class="fa fa-caret-square-o-down"></span></a>
+                    </span>
+                </div>
+                <div class="bookmarks">
+                </div> <!-- cb's -->
+            </div> <!-- cb wrapper -->
+
             <hr/>
 
             <div class="input-form">
@@ -108,39 +142,6 @@
                 <span>&nbsp;</span>
                 <button id="jump-to-line-clear">Clear</button>
             </div>
-
-            <hr/>
-
-            <div id="formulas-wrapper"></div>
-
-            <div id="options-bottom-right-off" style="margin-top:18px;">
-              <span class="clickable" id="btn-add-formula" style="margin-right:20px;"><span class="fa fa-plus"></span><span>&nbsp; Add formula</span></span>
-              <span class="clickable" id="btn-tips-formula" style="margin-right:20px;"><span class="fa fa-question"></span><span>&nbsp; Some tips</span></span>
-              <span class="clickable" id="info-backup-as" onclick="downloadChain();"><span class="fa fa-save"></span><span>&nbsp; Backup</span></span>
-
-              <template id="formula-template">
-                <div class="formula"><span class='fa fa-close close clickable'>&nbsp;</span><span class="desc" contenteditable="">Untitled formula</span><br/><span>{ <input class="equation" type="text" value=""> } =&gt; </span><span class="result"></span></div>
-              </template>
-            </div>
-
-            <hr/>            
-
-            <div class="bookmarks-wrapper">
-                <div id="options-bookmark-jump">
-                    <span>
-                        <span style="font-size:1.3rem;">Bookmarks</span>
-                        <a href="#" id="add-parser"><span class="fa fa-plus"></span></a>
-                    </span>
-                    <span>&nbsp;&nbsp;&nbsp;</span>
-                    <span>
-                        <a href="javascript:void(0);" onclick="$('html,body').animate({scrollTop: 0});"><span class="fa fa-caret-square-o-up"></span></a>
-                        <span>&nbsp;</span>
-                        <a href="javascript:void(0);" onclick="$('html,body').animate({ scrollTop: $('#options-bookmark-jump').offset().top });"><span class="fa fa-caret-square-o-down"></span></a>
-                    </span>
-                </div>
-                <div class="bookmarks">
-                </div> <!-- cb's -->
-            </div> <!-- cb wrapper -->
 
             <div id="mobile-flushed-bottom"></div>
         </div> <!-- /.container -->
