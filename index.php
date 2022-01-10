@@ -74,21 +74,20 @@
               <b>Count:&nbsp;</b>
               <span id="counter">0</span>
             </span>
-
-            <br/>
-            <div>
+            <div style="margin-top:5px"></div>
+            <span>
               <span style="font-weight:800;">Status: </span>
-              <span id="status"><span style="color:gray">You can display statuses or results here with the code $("#status").text(....) from any run code input fields.</span></span>
-            </div>
+              <span id="status"><span style="color:gray">Empty. You can display calculation highlights here with the formula $("#status").text(_TO_DISPLAY_).</span></span>
+            </span>
             
             <hr/>
 
             <div id="formulas-wrapper"></div>
 
             <div id="options-bottom-right-off" style="margin-top:18px;">
-              <span class="clickable" id="btn-add-formula" style="margin-right:20px;"><span class="fa fa-plus"></span><span>&nbsp; Add formula</span></span>
-              <span class="clickable" id="btn-tips-formula" style="margin-right:20px;"><span class="fa fa-question"></span><span>&nbsp; Some tips</span></span>
-              <span class="clickable" id="info-backup-as" onclick="downloadChain();"><span class="fa fa-save"></span><span>&nbsp; Backup</span></span>
+              <a href="javascript:void(0)" id="btn-add-formula" style="margin-right:20px;"><span class="fa fa-plus"></span><span>&nbsp; Add formula</span></a>
+              <a href="javascript:void(0)" id="btn-tips-formula" style="margin-right:20px;"><span class="fa fa-question"></span><span>&nbsp; Some tips</span></a>
+              <a href="javascript:void(0)" id="info-backup-as" onclick="downloadChain();"><span class="fa fa-save"></span><span>&nbsp; Backup</span></a>
 
               <template id="formula-template">
                 <div class="formula"><span class='fa fa-close close clickable'>&nbsp;</span><span class="desc" contenteditable="">Untitled formula</span><br/><span>{ <input class="equation" type="text" value=""> } =&gt; </span><span class="result"></span></div>
@@ -100,8 +99,7 @@
             <div class="bookmarks-wrapper">
                 <div id="options-bookmark-jump">
                     <span>
-                        <span style="font-size:1.3rem;">Bookmarks</span>
-                        <a href="#" id="add-parser"><span class="fa fa-plus"></span></a>
+                      <a href="#" id="add-parser" style="font-size:14px;"><span class="fa fa-plus"></span>&nbsp; Bookmarks</a>
                     </span>
                     <span>&nbsp;&nbsp;&nbsp;</span>
                     <span>
