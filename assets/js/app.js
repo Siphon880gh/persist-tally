@@ -721,6 +721,24 @@ FormulaSystem = class {
             } // constructor
 
         once() {
+                // Open file
+                $("#btn-open").on("click", () => {
+                    var userFilename = prompt("What file you're opening?");
+                    if(userFilename) {
+                        var url = window.location.href;
+                        let key = "open";
+                        let val = userFilename;
+                        if (url.indexOf('?') > -1){
+                            url=url.substring(0, url.indexOf('?')) + `?${key}=${val}`;
+                        } else {
+                            url=url + `?${key}=${val}`;
+                        }
+                        console.log({url})
+                        window.location.href = url;
+                    }
+
+                });
+
                 // Add formula row
                 $("#btn-add-formula").on("click", () => {
                     var newFormula = $("#formula-template").html();

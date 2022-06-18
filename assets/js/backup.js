@@ -1,21 +1,25 @@
 function downloadChain() {
     var params = new URLSearchParams(window.location.search);
-    var filename = params.get("open");
+    var oriFilename = params.get("open");
 
+    /** 
+        @subprocess
+        url is what's currently saved
+    */
     $.ajax({
-        url: `data/${filename}.json`,
+        url: `data/${oriFilename}.json`,
         dataType: "text"
     }).done(content => {
-        // Get filename based on folder name
+        // Get oriFilename based on folder name
         // url = window.location.href; 
         // if(url[url.length-1]==='/') url = url.substr(0, url.length-1); 
         // lastSlash = url.lastIndexOf("/"); 
-        // filename = url.substr(lastSlash+1)
-        downloadByContent(content, filename); // will popup the download
+        // oriFilename = url.substr(lastSlash+1)
+        downloadByContent(content, oriFilename); // will popup the download
     }) // ajax
 } // downloadChain
 
-function downloadByContent(data, fileName, type="text/plain") {
+function downloadByContent(data, oriFilename, type="text/plain") {
 // Create an invisible A element
 const a = document.createElement("a");
 a.style.display = "none";
@@ -27,7 +31,10 @@ a.href = window.URL.createObjectURL(
 );
 
 // Use download attribute to set set desired file name
-a.setAttribute("download", fileName);
+
+let today = ((myDate) => { return `${String(myDate.getMonth()+1).padStart(2, "0")}-${String(myDate.getDate()).padStart(2, "0")}-${myDate.getFullYear()}`;  })(new Date());
+let newFilename = `backup-${today}__persist-tally-${oriFilename}.json`;
+a.setAttribute("download", newFilename);
 
 // Trigger the download by simulating click
 a.click();

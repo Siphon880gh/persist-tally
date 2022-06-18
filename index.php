@@ -85,6 +85,7 @@
             <div id="formulas-wrapper"></div>
 
             <div id="options-bottom-right-off" style="margin-top:18px;">
+              <a href="javascript:void(0)" id="btn-open" style="margin-right:20px;"><span class="fa fa-download"></span><span>&nbsp; Open</span></a>
               <a href="javascript:void(0)" id="btn-add-formula" style="margin-right:20px;"><span class="fa fa-plus"></span><span>&nbsp; Add formula</span></a>
               <a href="javascript:void(0)" id="btn-tips-formula" style="margin-right:20px;"><span class="fa fa-question"></span><span>&nbsp; Some tips</span></a>
               <a href="javascript:void(0)" id="info-backup-as" onclick="downloadChain();"><span class="fa fa-save"></span><span>&nbsp; Backup</span></a>
