@@ -700,7 +700,7 @@ SaveLoadSystem = class {
                     reparseBookmarks();
                     tallier();
                     evalier();
-
+                    $("title").text(`PT - ${filename}`)
                 }); // done
         }; // load
 
