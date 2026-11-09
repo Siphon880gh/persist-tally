@@ -23,7 +23,7 @@
     <script src="dates/date.js?v=<?php echo time(); ?>"></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/index.css?v=<?php echo time(); ?>">
 
 </head>
     <body>

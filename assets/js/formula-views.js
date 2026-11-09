@@ -91,12 +91,18 @@ var FormulaViewSystem = class {
                     $index.text(`[${i}]`);
                 });
 
-                // Display order
+                // Display order. Set flex inline so it works even if an old index.css is cached
+                // (CSS "order" does nothing unless the wrapper is a flex container)
+                let wrapper = $("#formulas-wrapper")[0];
+                if (wrapper) {
+                    wrapper.style.display = "flex";
+                    wrapper.style.flexDirection = "column";
+                }
                 let view = this.activeView();
                 let order = view ? this.resolvedOrder(view) : [];
                 $("#formulas-wrapper .formula").each((i, el) => {
                     let pos = view ? order.indexOf($(el).attr("data-fid")) : -1;
-                    el.style.order = pos >= 0 ? pos : "";
+                    el.style.order = pos >= 0 ? String(pos) : "";
                 });
 
                 // View selector
@@ -198,6 +204,10 @@ var FormulaViewSystem = class {
             } // exitRearrange
 
         saveRearrange() {
+                if (!$("#opened-filename").text().length) {
+                    alert("Save this document first (click the save icon at the top) so the view can be saved with it.");
+                    return;
+                }
                 let order = $("#formula-view-list .fv-item").map((i, el) => $(el).attr("data-fid")).get();
                 let current = this.activeView();
                 let name = prompt(`Save this arrangement as a view.\nKeep the name to update it, or type a new name to make a new view:`, current ? current.name : "My view");
