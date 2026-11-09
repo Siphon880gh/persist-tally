@@ -6,18 +6,23 @@ By Weng (Weng Fei Fung)
 
 # Persistent Tally
 
-A plain-text notepad that auto-saves and keeps a running total of every line that starts with a number. It's great for when you gotta tally things over weeks or months.
+A plain-text notepad that auto-saves and keeps a running total of every line that starts with a number, so positive and negative lines balance each other out over weeks or months. Example: log hours worked as `4 refactoring auth` and recovery as `-2 played video games`, and a formula reminds you how many hours you have left before burnout.
 
-![Main view: notes on top, running tally, and formulas](screenshots/main.png)
+![Main view: work hours and recovery lines, running tally, and burnout formulas](screenshots/main.png)
 
-## Use cases
+## Good fit: balancing tallies that persist
 
-- **Workout logs:** pushups, reps, sets or minutes per session, with weekly progress toward a goal
-- **Workout and diet plans:** plans you check off and total up over a season
-- **Supplements and habits:** doses, cups of water, or days a habit was done
-- **Sleep:** hours slept per night and your average
-- **Budgets and balances:** spending or payments you subtract from a starting balance
-- **Hours and time tracking:** hours worked or earned, and how much time you have left
+Tallies that keep running for weeks or months, where positive and negative lines balance each other out to keep you in balance.
+
+- **Work hours vs. recovery:** positive lines for hours worked, negative lines for games, walks, or the gym, and a formula like `40 - tally` for the hours you have left before burnout
+- **Freelance hours:** one quick line per entry, hours first so it tallies, then the time range and what you did, like `8 9a-5p Worked on the chat agent on the website`. The tally keeps your total hours automatically, and the log lines can later be cleanly formatted into an invoice.
+- **Budgets and balances:** money in and money out against a starting balance
+- **Hours left on a contract or retainer:** subtract hours as you bill them
+- **Habits and streaks:** add for days done, subtract for days missed
+
+## Not a great fit: workout logs
+
+The tally never resets, so a log of reps or sets just keeps growing. It only works if you start a new file each week.
 
 ## Features
 
