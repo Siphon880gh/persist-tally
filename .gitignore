@@ -1,0 +1,6 @@
+# Personal tally data stays local (never committed)
+data/*
+backups/*
+
+# macOS
+.DS_Store
