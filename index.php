@@ -17,6 +17,7 @@
     <script src="assets/js/libs/multisearch-textarea.js"></script>
 
     <!-- JS -->
+    <script src="assets/js/formula-views.js?v=<?php echo time(); ?>"></script>
     <script src="assets/js/app.js?v=<?php echo time(); ?>"></script>
     <script src="assets/js/backup.js?v=<?php echo time(); ?>"></script>
     <script src="dates/date.js?v=<?php echo time(); ?>"></script>
@@ -81,6 +82,22 @@
             </span>
             
             <hr/>
+
+            <div id="formula-views-bar" class="hide">
+              <span id="formula-view-normal">
+                <span class="fa fa-eye" title="Formula view"></span>
+                <select id="formula-view-select"><option value="">Original</option></select>
+                <a href="javascript:void(0)" id="formula-view-rearrange" title="Drag formulas into a saved view (getResult indices stay the same)"><span class="fa fa-arrows-v"></span><span>&nbsp; Rearrange</span></a>
+                <a href="javascript:void(0)" id="formula-view-rename" class="hide" title="Rename view"><span class="fa fa-pencil"></span></a>
+                <a href="javascript:void(0)" id="formula-view-delete" class="hide" title="Delete view"><span class="fa fa-trash"></span></a>
+              </span>
+              <span id="formula-view-rearranging" class="hide">
+                <span class="text-muted">Drag rows to rearrange.</span>
+                <a href="javascript:void(0)" id="formula-view-save"><span class="fa fa-check"></span><span>&nbsp; Save view</span></a>
+                <a href="javascript:void(0)" id="formula-view-cancel"><span class="fa fa-close"></span><span>&nbsp; Cancel</span></a>
+              </span>
+            </div>
+            <div id="formula-view-list"></div>
 
             <div id="formulas-wrapper"></div>
 

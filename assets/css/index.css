@@ -32,6 +32,51 @@ input {
 .formula {
   margin-bottom: 5px;
 }
+
+/* Formula views: display order only (CSS order), DOM keeps original rows */
+#formulas-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+#formulas-wrapper.hide {
+  display: none;
+}
+.formula-index {
+  color: #9ba8b8;
+  margin-right: 5px;
+}
+#formula-views-bar {
+  margin-bottom: 10px;
+}
+#formula-views-bar a {
+  margin-left: 12px;
+}
+#formula-view-select {
+  margin-left: 3px;
+}
+.fv-item {
+  padding: 5px;
+  margin-bottom: 4px;
+  border: 1px dashed #ccc;
+  border-radius: 2.5px;
+  background-color: #fff;
+}
+.fv-grip {
+  cursor: move;
+  color: #9ba8b8;
+  margin-right: 8px;
+  padding: 2px 4px;
+}
+.fv-result {
+  color: #31708f;
+  margin-left: 5px;
+}
+.fv-arrows {
+  float: right;
+}
+.fv-arrows a {
+  margin-left: 8px;
+}
 #options-bottom-right {
   position:relative; bottom:10px; right:10px;
   background-color: rgba(255, 255, 255, .5);
