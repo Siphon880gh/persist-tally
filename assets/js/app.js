@@ -15,6 +15,7 @@ $(() => {
     // Apps
     var BookmarkSystem1 = new BookmarkSystem();
     var FormulaSystem1 = new FormulaSystem();
+    var FormulaViewSystem1 = new FormulaViewSystem(); // saved views (display order) for formulas
     var ResizeTextareaSystem1 = new ResizeTextareaSystem();
     var App1 = new App();
 });
@@ -611,7 +612,8 @@ SaveLoadSystem = class {
 
             $(".formula").each((a, el, ) => {
                 var $formula = $(el);
-                var formula = { desc: "", equation: "" };
+                var formula = { id: "", desc: "", equation: "" };
+                formula.id = $formula.attr("data-fid") || "";
                 formula.desc = $formula.find(".desc").text();
                 formula.equation = $formula.find(".equation").val();
                 // formula.equation = $formula.find(".equation").val();
@@ -639,6 +641,7 @@ SaveLoadSystem = class {
                 bookmarkTitles: bookmarkTitles,
                 bookmarkTokens: bookmarkTokens
             }
+            if (window.FormulaViews) Object.assign(data, FormulaViews.serialize()); // formulaViews, activeFormulaView
             $.post("data-write/write.php", { payload: data }).done(res => {
                 // console.log("Triggered to save" + res);
                 $("#page-corner-anim").fadeIn(200);
@@ -660,6 +663,8 @@ SaveLoadSystem = class {
                             formulas = [],
                             bookmarkTitles = [],
                             bookmarkTokens = [],
+                            formulaViews = [],
+                            activeFormulaView = "",
                     } = (obj.toString().length > 2) ? obj: {};
 
                     $("#textarea").val(textarea);
@@ -679,12 +684,13 @@ SaveLoadSystem = class {
                     // var bookmarks = [];
                     if (formulas.length) {
                         formulas.forEach(formulaPanel => {
-                            var { desc, equation } = formulaPanel;
+                            var { id, desc, equation } = formulaPanel;
                             var $newDom = $(`
             <div class='formula'><span class='fa fa-close close'>&nbsp;</span><span class='desc' contenteditable></span><br/><span>{ <input class='equation' type='text'></input> } => </span><span class='result'></span></div>
           `);
                             $newDom.find(".desc").html(desc);
                             $newDom.find(".equation").val(equation);
+                            if (id) $newDom.attr("data-fid", id);
                             // $newDom.find(".desc").html(decodeURIComponent(desc));
                             // $newDom.find(".equation").val(decodeURIComponent(equation));
                             $("#formulas-wrapper").append($newDom);
@@ -697,6 +703,7 @@ SaveLoadSystem = class {
                         // addBookmark({ title: title, token:token });
                         addBookmark({ title, token });
                     });
+                    if (window.FormulaViews) FormulaViews.load(formulaViews, activeFormulaView);
                     reparseBookmarks();
                     tallier();
                     evalier();
@@ -743,7 +750,9 @@ FormulaSystem = class {
                 $("#btn-add-formula").on("click", () => {
                     var newFormula = $("#formula-template").html();
                     var $formulas = $("#formulas-wrapper");
+                    if (window.FormulaViews) FormulaViews.exitRearrange();
                     $formulas.append(newFormula);
+                    if (window.FormulaViews) FormulaViews.render(); // new row gets an id + shows at end of current view
                     setTimeout(save, 200);
                 });
 
@@ -755,11 +764,15 @@ FormulaSystem = class {
       The tally number is available to you:
         tally = the tally number below the textarea
 
-      You can get previous results. Notice indices at the eq numbers:
+      You can get previous results. Notice the [index] before each formula title:
         getResult(0)
         getResult(1)
         getResult(2)
         getResult(3)
+
+      Rearranging: click "Rearrange" above the formulas, drag rows by the grip
+      (or use the arrows), then "Save view". Views only change the display
+      order. getResult(X) always uses the original [index].
       
       You can do many js functions:
         parseInt(..)
@@ -788,6 +801,7 @@ FormulaSystem = class {
                         if (!confirm(`Are you sure you want to remove formula "${title}"?`)) return false;
 
                         $formula.remove();
+                        if (window.FormulaViews) FormulaViews.render(); // renumber indices, drop from views
                         setTimeout(save, 200);
                     });
                 });
